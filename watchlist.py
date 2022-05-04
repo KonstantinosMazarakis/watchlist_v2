@@ -29,7 +29,7 @@ def save_to_csv_from_yahoo(ticker, syear, smonth, sday, eyear, emonth, eday,file
 
     # pulls single stack informations
     df = web.DataReader(ticker, 'yahoo', start, end)
-    df.to_csv(f"C:/CodingDojo/projects/watchlist/csv/{file}/" + ticker + '.csv')
+    df.to_csv(f"C:/CodingDojo/projects/watchlist_v2/csv/{file}/" + ticker + '.csv')
     return df
 
 
@@ -49,7 +49,7 @@ def save_to_csv_from_yahoo_all_stocks(syear, smonth, sday, eyear, emonth, eday, 
 # Reads a dataframe from the CSV file, changes index to date and returns it
 def get_df_from_csv(ticker,file = "single"):
     try:
-        df = pd.read_csv(f"C:/CodingDojo/projects/watchlist/csv/{file}/" + ticker + '.csv')
+        df = pd.read_csv(f"C:/CodingDojo/projects/watchlist_v2/csv/{file}/" + ticker + '.csv')
     except FileNotFoundError:
         print("File Doesn't Exist")
     else:
@@ -85,7 +85,7 @@ def watchlist(num = 20):
         "Volume":[""]
     }
     top_20 = pd.DataFrame(cols)
-    all_stacks_folder = os.scandir('C:/CodingDojo/projects/watchlist/csv/all/')
+    all_stacks_folder = os.scandir('C:/CodingDojo/projects/watchlist_v2/csv/all/')
 
     for ticker in all_stacks_folder:
         try:
@@ -96,7 +96,7 @@ def watchlist(num = 20):
         except TypeError:
             print("File Doesn't Exist")
     top_20.drop([0], inplace = True)
-    top_20.to_csv('C:/CodingDojo/projects/watchlist/top_20.csv')
+    top_20.to_csv('C:/CodingDojo/projects/watchlist_v2/top_20.csv')
     print(top_20.sort_values(by=['Roi'], ascending=False).head(num))
     return
 
@@ -105,7 +105,7 @@ def watchlist(num = 20):
 
 # watchlist(10)
 
-# save_to_csv_from_yahoo_all_stocks(2022,2,21,2022,2,25)
+save_to_csv_from_yahoo_all_stocks(2022,5,4,2022,5,4)
 
 
 # save_to_csv_from_yahoo("BTC",2022,2,21,2022,2,25)
